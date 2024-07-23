@@ -13,7 +13,7 @@ export default {
 	data: function () {
 		return {
 			homepage: __Root,
-			feedback: feedback,
+			feedback: __Root + "dashboard/feedback/",
 		};
 	},
 };
