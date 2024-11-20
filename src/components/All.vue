@@ -11,6 +11,12 @@
 					</el-checkbox>
 				</el-checkbox-group>
 			</div>
+			<div class="m-filter-box">
+				<span class="u-label">时间</span>
+				<el-radio-group class="u-group" v-model="filter_start_time">
+					<el-radio :label="item.value" v-for="(item, i) in filter_time.list" :key="i">{{ item.label }}</el-radio>
+				</el-radio-group>
+			</div>
 		</div>
 		<ul class="m-result m-post" v-if="data.length">
 			<li class="u-item" v-for="(item, i) in data" :key="i">
@@ -68,6 +74,18 @@ export default {
 				// label: "分类",
 				// list: [],
 				// },
+			},
+			filter_start_time: "",
+			filter_time: {
+				label: "时间",
+				list: [
+					{ label: "不限", value: "" },
+					{ label: "近一周", value: new Date() - 7 * 24 * 60 * 60 * 1000 },
+					{ label: "近一月", value: new Date() - 30 * 24 * 60 * 60 * 1000 },
+					{ label: "近三月", value: new Date() - 90 * 24 * 60 * 60 * 1000 },
+					{ label: "近半年", value: new Date() - 180 * 24 * 60 * 60 * 1000 },
+					{ label: "近一年", value: new Date() - 365 * 24 * 60 * 60 * 1000 },
+				],
 			},
             params: {},
 		};
@@ -165,6 +183,10 @@ export default {
 		q: function () {
 			this.page = 1;
 			this.loadData();
+		},
+		filter_start_time: function (val) {
+			this.params.filter_start_time = ~~(val / 1000);
+			this.loadData(1, false, this.params);
 		},
 	},
 	mounted: function () {
