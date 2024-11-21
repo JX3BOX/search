@@ -105,7 +105,7 @@ export default {
 		resolveImagePath,
 		loadData(i = 1, append = false, params = this.params) {
 			this.loading = true;
-			const _params = Object.assign({ q: this.q, pageIndex: i }, params);
+			const _params = Object.assign({ q: this.q, pageIndex: i, filter_start_time: ~~(this.filter_start_time / 1000) }, params);
 			geSearch(_params)
 				.then((res) => {
 					const data = res.data.data;
@@ -185,8 +185,7 @@ export default {
 			this.loadData();
 		},
 		filter_start_time: function (val) {
-			this.params.filter_start_time = ~~(val / 1000);
-			this.loadData(1, false, this.params);
+			this.loadData(1);
 		},
 	},
 	mounted: function () {
