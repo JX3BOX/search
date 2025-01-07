@@ -70,10 +70,10 @@ export default {
 					label: "作者",
 					list: [],
 				},
-				// filter_category: {
-				// label: "分类",
-				// list: [],
-				// },
+				filter_category: {
+					label: "分类",
+					list: [],
+				},
 			},
 			filter_start_time: "",
 			filter_time: {
